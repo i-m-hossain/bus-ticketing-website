@@ -55,7 +55,7 @@ function addSeat(seatId) {
         localStorage.setItem("seats", JSON.stringify(newSeat));
         location.reload();
     }
-    alert("you have booked the ticket");
+    alert("you have selected the ticket");
 }
 
 function bookSeat() {
@@ -98,3 +98,17 @@ function cancelSeat() {
     localStorage.setItem("seats", JSON.stringify(newSeat));
     location.reload();
 }
+
+//logout
+function handleLogout() {
+    sessionStorage.clear();
+    window.location = "/login.html";
+}
+
+//get logged in users
+function loggedInUser() {
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const loggedInUser = document.getElementById("loggedInUser");
+    loggedInUser.innerText = user.username;
+}
+loggedInUser();
