@@ -11,6 +11,7 @@
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="./common.css" />
     </head>
     <style></style>
     <body>
@@ -23,8 +24,14 @@
                     please choose from the available seats for proceeding with
                     booking
                 </p>
-                <h6>Logged in as <span id="loggedInUser"></span></h6>
-                <button onclick="handleLogout()" class="btn btn-danger">
+                <h6>
+                    Logged in as
+                    <span
+                        id="loggedInUser"
+                        class="availableColor px-2 border rounded"
+                    ></span>
+                </h6>
+                <button onclick="handleLogout()" class="btn occupiedColor">
                     Logout
                 </button>
                 <h6 class="mt-4">My booked tickets</h6>
@@ -33,6 +40,7 @@
                     id="bookedSeats"
                 ></div>
             </section>
+
             <section>
                 <div class="border border-secondary p-4">
                     <div class="d-flex justify-content-between mt-2">
@@ -44,20 +52,21 @@
                 </div>
 
                 <div class="d-flex justify-content-between mt-2">
-                    <button class="bg-primary border-0" onclick="bookSeat()">
+                    <button class="book book-border" onclick="bookSeat()">
                         Book
                     </button>
-                    <button class="bg-danger border-0" onclick="cancelSeat()">
+                    <button class="cancel cancel-border" onclick="cancelSeat()">
                         Cancel
                     </button>
                 </div>
             </section>
             <section class="d-flex flex-column ms-4">
                 <div class="mb-4">
-                    <span class="bg-danger px-4 py-1 me-2"></span> occupied
+                    <span class="occupiedColor px-4 py-1 me-2"></span> occupied
                 </div>
                 <div>
-                    <span class="bg-success px-4 py-1 me-2"></span> Available
+                    <span class="availableColor px-4 py-1 me-2"></span>
+                    Available
                 </div>
             </section>
         </main>

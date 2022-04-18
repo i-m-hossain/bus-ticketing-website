@@ -5,7 +5,7 @@
     padding: 5px;
     font-size: 12px;
     font-weight: bold;
-    color: #8a0000;
+    color: #333;
     border: 1px solid #8a0000;
     background-color: #e58f8f;
     opacity: 0;
@@ -13,4 +13,36 @@
 
 #error-msg-second-line {
     display: block;
+}
+
+.availableColor {
+    background-color: #d6e8d4;
+}
+.occupiedColor {
+    background-color: #f7cfcc;
+}
+.occupiedBorder {
+    border: #c26e6a;
+}
+.cancel {
+    background: #ffe6cc;
+}
+.cancel-border {
+    border: 2px solid #f1cf8d;
+}
+.book-border {
+    border: 2px solid #89a6cf;
+}
+.book {
+    background-color: #dbe8fc;
+}
+.create {
+    background: #e1d4e7;
+}
+.create-border {
+    border: 2px solid #c0aaca;
+}
+.login-radius {
+    border: 2px solid #999;
+    border-radius: 50px;
 }

@@ -11,6 +11,14 @@ registerButton.addEventListener("click", (e) => {
 
     if (username && password) {
         if (dbUsers) {
+            const exist = dbUsers.find(
+                (user) =>
+                    user.username === username && user.password === password
+            );
+            if (exist) {
+                alert("you are already registered!please login instead.");
+                return;
+            }
             const allUsers = [...dbUsers, { username, password }];
             console.log(allUsers);
             localStorage.setItem("users", JSON.stringify(allUsers));
