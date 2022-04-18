@@ -1,8 +1,8 @@
 const bookedSeats = JSON.parse(localStorage.getItem("bookedSeats"));
 const localStorageSeats = JSON.parse(localStorage.getItem("seats"));
 const initialSeat = [
-    { id: 1, value: "A1", status: 0, booked: false },
-    { id: 2, value: "A2", status: 0, booked: false },
+    { id: 1, value: "A1", status: 1, booked: false },
+    { id: 2, value: "A2", status: 1, booked: false },
     { id: 3, value: "A3", status: 1, booked: false },
     { id: 4, value: "B1", status: 1, booked: false },
     { id: 5, value: "B2", status: 1, booked: false },
@@ -27,11 +27,13 @@ const seatContainer = document.getElementById("seatContainer");
          <div 
             id="${seat.id}" 
             class="${seat.status === 1 ? "bg-success" : "bg-danger"}  ${
-            seat.booked ? "border-4 border border-warning" : ""
+            seat.booked && seat.status ? "border-4 border border-warning" : ""
         } p-2 me-2 mb-2" style="width:calc(100% * (1/3) - 10px - 1px) "
             onclick="addSeat(${seat.id})"
-            >${seat.value}</div>           
-`)
+        >
+            ${seat.value}
+        </div>           
+    `)
 );
 
 //click event on onclick seat
@@ -56,4 +58,43 @@ function addSeat(seatId) {
     alert("you have booked the ticket");
 }
 
-console.log(bookedSeats);
+function bookSeat() {
+    if (!localStorageSeats) {
+        alert("First select a seat");
+        return;
+    }
+    const selectedSeats = localStorageSeats.filter((item) => item.booked);
+    if (selectedSeats.length === 0) {
+        alert("No seat is selected");
+        return;
+    }
+    selectedSeats.forEach((seat) => (seat.status = 0));
+    const newSeat = [...localStorageSeats];
+    localStorage.setItem("seats", JSON.stringify(newSeat));
+    location.reload();
+}
+function cancelSeat() {
+    if (!localStorageSeats) {
+        alert("No seat is selected");
+        return;
+    }
+    const occupied = localStorageSeats.filter((item) => item.status === 0);
+    const booked = localStorageSeats.filter((item) => item.booked);
+    if (booked.length === 0) {
+        alert("No seat is selected");
+        return;
+    }
+    if (occupied.length === 0) {
+        alert("No seat is selected");
+        return;
+    }
+
+    const selectedSeats = localStorageSeats.forEach((item) => {
+        item.booked = false;
+        item.status = 1;
+    });
+
+    const newSeat = [...localStorageSeats];
+    localStorage.setItem("seats", JSON.stringify(newSeat));
+    location.reload();
+}
