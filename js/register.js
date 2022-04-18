@@ -11,7 +11,6 @@ registerButton.addEventListener("click", (e) => {
 
     if (username && password) {
         if (dbUsers) {
-            alert("heloo");
             const allUsers = [...dbUsers, { username, password }];
             console.log(allUsers);
             localStorage.setItem("users", JSON.stringify(allUsers));

@@ -1,21 +1,22 @@
 const bookedSeats = JSON.parse(localStorage.getItem("bookedSeats"));
 const localStorageSeats = JSON.parse(localStorage.getItem("seats"));
+const user = JSON.parse(sessionStorage.getItem("user"));
 const initialSeat = [
-    { id: 1, value: "A1", status: 1, booked: false },
-    { id: 2, value: "A2", status: 1, booked: false },
-    { id: 3, value: "A3", status: 1, booked: false },
-    { id: 4, value: "B1", status: 1, booked: false },
-    { id: 5, value: "B2", status: 1, booked: false },
-    { id: 6, value: "B3", status: 1, booked: false },
-    { id: 7, value: "C1", status: 1, booked: false },
-    { id: 8, value: "C2", status: 1, booked: false },
-    { id: 9, value: "C3", status: 1, booked: false },
-    { id: 10, value: "D1", status: 1, booked: false },
-    { id: 11, value: "D2", status: 1, booked: false },
-    { id: 12, value: "D3", status: 1, booked: false },
-    { id: 13, value: "E1", status: 1, booked: false },
-    { id: 14, value: "E2", status: 1, booked: false },
-    { id: 15, value: "E3", status: 1, booked: false },
+    { id: 1, value: "A1", status: 1, booked: false, user: null },
+    { id: 2, value: "A2", status: 1, booked: false, user: null },
+    { id: 3, value: "A3", status: 1, booked: false, user: null },
+    { id: 4, value: "B1", status: 1, booked: false, user: null },
+    { id: 5, value: "B2", status: 1, booked: false, user: null },
+    { id: 6, value: "B3", status: 1, booked: false, user: null },
+    { id: 7, value: "C1", status: 1, booked: false, user: null },
+    { id: 8, value: "C2", status: 1, booked: false, user: null },
+    { id: 9, value: "C3", status: 1, booked: false, user: null },
+    { id: 10, value: "D1", status: 1, booked: false, user: null },
+    { id: 11, value: "D2", status: 1, booked: false, user: null },
+    { id: 12, value: "D3", status: 1, booked: false, user: null },
+    { id: 13, value: "E1", status: 1, booked: false, user: null },
+    { id: 14, value: "E2", status: 1, booked: false, user: null },
+    { id: 15, value: "E3", status: 1, booked: false, user: null },
 ];
 
 //display seats
@@ -44,6 +45,7 @@ function addSeat(seatId) {
             (seat) => seat.id === seatId
         );
         selectedSeat.booked = true;
+        selectedSeat.user = user.username;
         const newSeat = [...localStorageSeats];
         localStorage.setItem("seats", JSON.stringify(newSeat));
         location.reload();
@@ -51,6 +53,7 @@ function addSeat(seatId) {
         //if local storage has no data, update local storage with initial data and booked status
         const selectedSeat = initialSeat.find((seat) => seat.id === seatId);
         selectedSeat.booked = true;
+        selectedSeat.user = user.username;
         const newSeat = [...initialSeat];
         localStorage.setItem("seats", JSON.stringify(newSeat));
         location.reload();
@@ -92,6 +95,7 @@ function cancelSeat() {
     const selectedSeats = localStorageSeats.forEach((item) => {
         item.booked = false;
         item.status = 1;
+        item.user = null;
     });
 
     const newSeat = [...localStorageSeats];
@@ -112,3 +116,21 @@ function loggedInUser() {
     loggedInUser.innerText = user.username;
 }
 loggedInUser();
+function displayBookedSeats(user) {
+    const userSeats = (localStorageSeats || []).filter(
+        (seat) => seat.user === user && !seat.status
+    );
+    const bookedSeats = document.getElementById("bookedSeats");
+    if (!userSeats.length || !localStorageSeats.length) {
+        bookedSeats.innerHTML += "<p class='p-2'>No ticket found</p>";
+        return;
+    }
+    userSeats.map(
+        (seat) =>
+            (bookedSeats.innerHTML += `
+            <div class="p-2" style="width:calc(100% * (1/3) - 10px - 1px)"> ${seat.value}</div>
+
+    `)
+    );
+}
+displayBookedSeats(user.username);
