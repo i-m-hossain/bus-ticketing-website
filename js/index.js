@@ -1,6 +1,12 @@
 const bookedSeats = JSON.parse(localStorage.getItem("bookedSeats"));
 const localStorageSeats = JSON.parse(localStorage.getItem("seats"));
 const user = JSON.parse(sessionStorage.getItem("user"));
+if (!user) {
+    const notification = document.getElementById("notification");
+    notification.innerText =
+        "Please login before coming this page as route protection isn't implemented yet";
+    notification.style.color = "red";
+}
 const initialSeat = [
     { id: 1, value: "A1", status: 1, booked: false, user: null },
     { id: 2, value: "A2", status: 1, booked: false, user: null },
