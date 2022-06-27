@@ -37,7 +37,7 @@ registerButton.addEventListener("click", (e) => {
             );
         }
 
-        window.location = "/bus-ticketing-website/";
+        window.location = "/";
     } else {
         registerErrorMsg.style.opacity = 1;
     }
