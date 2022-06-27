@@ -117,7 +117,7 @@ function cancelSeat() {
 //logout
 function handleLogout() {
     sessionStorage.clear();
-    window.location = "/login.html";
+    window.location = "/bus-ticketing-website/login.html";
 }
 
 //get logged in users
