@@ -24,7 +24,7 @@ loginButton.addEventListener("click", (e) => {
                 alert("You are not registered. Please sign up");
                 return;
             } else {
-                window.location = "/";
+                window.location = "/bus-ticketing-website";
                 sessionStorage.setItem(
                     "user",
                     JSON.stringify({ username, password })
